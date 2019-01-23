@@ -1,0 +1,7 @@
+./appendnum.pl < $2 > __tmp4__
+./transnum.pl __tmp1__ < __tmp4__ > __tmp2__
+rm -f __tmp4__
+./lcm $1 $5 $6 $7 $8 $9 $10 $11 $12 $13 $14 $15 __tmp2__ $3 __tmp3__
+touch __tmp3__
+./untransnum.pl __tmp1__ < __tmp3__ > $4
+rm -f __tmp1__  __tmp2__  __tmp3__

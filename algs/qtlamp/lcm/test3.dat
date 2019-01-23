@@ -1,0 +1,11 @@
+blue,true,-
+red,-,+
+blue,false,-
+red,true,yes
+yellow,+,yes
+blue,true,yes
++,-,no
+-,-,no
+blue,false,no
++,false,no
+blue,-,yes
