@@ -3,6 +3,8 @@
 
 **LaundryML is a regularized model enumeration algorithm that enumerates rule lists for rationalization.
 
+This code is based on the implementation of the Certifiably Optimal RulE ListS (CORELS) algorithm. For information on CORELS, please visit [its website](https://corels.eecs.harvard.edu).
+
 ### Python dependencies
 * pip install -r requirements.txt
 
