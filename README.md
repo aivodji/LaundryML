@@ -20,7 +20,7 @@ This code is based on the implementation of the Certifiably Optimal RulE ListS (
 
 * [Adult Income]: python benchmark_adult.py
 * [ProPublica Recidivism]: python benchmark_compas.py
-* Result will be generated in the folder "res"
+* Result will be generated in the folder "output"
 
 ### Scripts for outcome rationalization 
 
