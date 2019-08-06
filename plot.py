@@ -9,19 +9,19 @@ import os
 from sklearn.externals import joblib
 import numpy as np
 
-def enumplot(prefix,exp_prefix):
+def enumplot(res_folder, prefix,exp_prefix):
     # experiments results urls
-    objectiveFunction_results = './res/%s/%s/objectiveFunction.dump' %(prefix,exp_prefix)
+    objectiveFunction_results = './%s/%s/%s/objectiveFunction.dump' %(res_folder,prefix,exp_prefix)
 
     # files for train performances
-    unfairness_train_results              = './res/%s/%s/unfairness_train.dump'        %  (prefix,exp_prefix)
-    accuracy_train_results                = './res/%s/%s/accuracy_train.dump'           %(prefix,exp_prefix)
+    unfairness_train_results              = './%s/%s/%s/unfairness_train.dump'        %  (res_folder,prefix,exp_prefix)
+    accuracy_train_results                = './%s/%s/%s/accuracy_train.dump'           %(res_folder,prefix,exp_prefix)
 
     # files for test performances
-    unfairness_test_results              = './res/%s/%s/unfairness_test.dump'         %(prefix,exp_prefix)
-    accuracy_test_results                = './res/%s/%s/accuracy_test.dump'           %(prefix,exp_prefix)
+    unfairness_test_results              = './%s/%s/%s/unfairness_test.dump'         %(res_folder,prefix,exp_prefix)
+    accuracy_test_results                = './%s/%s/%s/accuracy_test.dump'           %(res_folder,prefix,exp_prefix)
 
-    img_file = './res/%s/%s/plot.png' %(prefix,exp_prefix)
+    img_file = './%s/%s/%s/plot.png' %(res_folder,prefix,exp_prefix)
 
     # objectives values
     obj_ = joblib.load(objectiveFunction_results)
@@ -35,16 +35,14 @@ def enumplot(prefix,exp_prefix):
     fidelity_test = joblib.load(accuracy_test_results)
 
 
-    print(sorted(obj_, reverse=True) == obj_)
+    #print(sorted(obj_, reverse=True) == obj_)
+    #print("unfairness_train ", unfairness_train)
 
-       
     fig = plt.figure()
     plt.subplot(2,2,1)
     plt.plot(obj_,'o-b')
     plt.ylabel('Objective function')
 
-    
-    
     
     plt.subplot(2,2,2)
     plt.plot(fidelity_test,'o-g', label='test')
@@ -67,11 +65,8 @@ def enumplot(prefix,exp_prefix):
     plt.ylabel('fidelity')
     plt.xlabel('unfairness') """
 
-    
-
     fig.savefig(img_file)
     # plt.show()
-
 
 
 def enumplot_local(prefix,exp_prefix):
@@ -127,7 +122,6 @@ def enumplot_local(prefix,exp_prefix):
 
     fig.savefig(img_file)
     # plt.show()
-
 
 
 def best_unfairness(prefix,exp_prefix):

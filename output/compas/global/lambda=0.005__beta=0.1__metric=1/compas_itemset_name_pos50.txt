@@ -1,0 +1,14 @@
+#label_name
+recidivate-within-two-years:Yes
+#itemset_name
+race:AfricanAmerican
+race:NativeAmerican
+juv_fel_count:>1.5
+juv_other_count:>0.5
+priors_count:2.5-4.5
+priors_count:4.5-5.5
+priors_count:5.5-8.5
+priors_count:8.5-14.5
+priors_count:14.5-15.5
+priors_count:15.5-27.5
+priors_count:>27.5

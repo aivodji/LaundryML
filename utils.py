@@ -13,6 +13,7 @@ os.chdir('.')
 from RuleModels import CORELS_Enumerator
 
 
+
 def convert_file(original_data_file, original_label_file, new_data_file, new_itemset_file=None, new_itemset_name_file=None):
     records = []
     record_names = []
@@ -110,33 +111,32 @@ def gen_sub_itemset(train_file, itemset_file, itemset_name_file, subitemset_file
             f.write('%s\n' % (names[i],))
         f.close()
 
-def genData(data_prefix, exp_prefix, test_prefix='', alpha=0.5):
+def genData(data_prefix, exp_prefix, test_prefix='', res_folder='output', alpha=0.5):
     # input file names
-    train_file_items            = './algs/corels/data/%s/processed/_train.feature'        % (data_prefix)
-    train_file_labels           = './algs/corels/data/%s/processed/_train%s.label'        % (data_prefix, test_prefix)
+    train_file_items            = './data/%s/processed/_train.feature'        % (data_prefix)
+    train_file_labels           = './data/%s/processed/_train%s.label'        % (data_prefix, test_prefix)
 
-    test_file_items             = './algs/corels/data/%s/processed/_test.feature'        % (data_prefix)
-    test_file_labels            = './algs/corels/data/%s/processed/_test%s.label'         % (data_prefix, test_prefix)
+    test_file_items             = './data/%s/processed/_test.feature'        % (data_prefix)
+    test_file_labels            = './data/%s/processed/_test%s.label'         % (data_prefix, test_prefix)
 
     # output files names
-    train_file                  = './res/%s/%s/%s_train.txt'                           % (data_prefix, exp_prefix, data_prefix)
-    test_file                   = './res/%s/%s/%s_test.txt'                            % (data_prefix, exp_prefix, data_prefix)
+    train_file                  = './%s/%s/%s/%s_train.txt'                           % (res_folder, data_prefix, exp_prefix, data_prefix)
+    test_file                   = './%s/%s/%s/%s_test.txt'                            % (res_folder, data_prefix, exp_prefix, data_prefix)
 
-    itemset_file                = './res/%s/%s/%s_itemset.txt'                         % (data_prefix, exp_prefix, data_prefix)
-    itemset_name_file           = './res/%s/%s/%s_itemset_name.txt'                    % (data_prefix, exp_prefix, data_prefix)
-    subitemset_file             = './res/%s/%s/%s_itemset_pos%02d.txt'          	   % (data_prefix, exp_prefix, data_prefix, (int(100 * alpha)))
-    subitemset_name_file        = './res/%s/%s/%s_itemset_name_pos%02d.txt'			% (data_prefix, exp_prefix, data_prefix, (int(100 * alpha)))
+    itemset_file                = './%s/%s/%s/%s_itemset.txt'                         % (res_folder, data_prefix, exp_prefix, data_prefix)
+    itemset_name_file           = './%s/%s/%s/%s_itemset_name.txt'                    % (res_folder, data_prefix, exp_prefix, data_prefix)
+    subitemset_file             = './%s/%s/%s/%s_itemset_pos%02d.txt'          	   % (res_folder, data_prefix, exp_prefix, data_prefix, (int(100 * alpha)))
+    subitemset_name_file        = './%s/%s/%s/%s_itemset_name_pos%02d.txt'			% (res_folder, data_prefix, exp_prefix, data_prefix, (int(100 * alpha)))
 
     # covert files
     convert_file(train_file_items, train_file_labels, train_file, itemset_file, itemset_name_file)
     convert_file(test_file_items, test_file_labels, test_file)
     gen_sub_itemset(train_file, itemset_file, itemset_name_file, subitemset_file, subitemset_name_file, alpha=alpha)
 
-
 def genData_local(data_prefix, exp_prefix, test_prefix='', alpha=0.5):
     # input file names
-    train_file_items            = './algs/corels/data/%s/local/_train.feature'        % (data_prefix)
-    train_file_labels           = './algs/corels/data/%s/local/_train%s.label'        % (data_prefix, test_prefix)
+    train_file_items            = './data/%s/local/_train.feature'        % (data_prefix)
+    train_file_labels           = './data/%s/local/_train%s.label'        % (data_prefix, test_prefix)
 
 
     # output files names
@@ -150,27 +150,25 @@ def genData_local(data_prefix, exp_prefix, test_prefix='', alpha=0.5):
     # covert files
     convert_file(train_file_items, train_file_labels, train_file, itemset_file, itemset_name_file)
     gen_sub_itemset(train_file, itemset_file, itemset_name_file, subitemset_file, subitemset_name_file, alpha=alpha)
-
    
-def test_corels(data_prefix, exp_prefix, test_prefix='', rho=0.015, beta=0.0, k=50, opt='-c 2 -p 1', branch_depth=np.inf):
+def test_corels(data_prefix, exp_prefix, test_prefix='', res_folder='output', rho=0.015, beta=0.0, metric=1, min_pos=2, maj_pos=1, k=50, opt='-c 2 -p 1', branch_depth=np.inf):
 
-    data_file               = './res/%s/%s/%s_train.txt'                           % (data_prefix, exp_prefix, data_prefix)
-    test_file               = './res/%s/%s/%s_test.txt'                            % (data_prefix, exp_prefix, data_prefix)
-    minor_file            = './algs/corels/data/%s/processed/_train.minor'        % (data_prefix)
+    data_file               = './%s/%s/%s/%s_train.txt'                           % (res_folder, data_prefix, exp_prefix, data_prefix)
+    test_file               = './%s/%s/%s/%s_test.txt'                            % (res_folder, data_prefix, exp_prefix, data_prefix)
+    minor_file            = './data/%s/processed/_train.minor'        % (data_prefix)
 
-    itemset_file            = './res/%s/%s/%s_itemset.txt'                         % (data_prefix, exp_prefix, data_prefix)
-    itemset_name_file       = './res/%s/%s/%s_itemset_name.txt'                    % (data_prefix, exp_prefix, data_prefix)
-    model_file              = './res/%s/%s/%s_corels.mdl'                     % (data_prefix, exp_prefix, data_prefix)
-    res_file                = './res/%s/%s/%s_corels_result.txt'              % (data_prefix, exp_prefix, data_prefix)
+    itemset_file            = './%s/%s/%s/%s_itemset.txt'                         % (res_folder, data_prefix, exp_prefix, data_prefix)
+    itemset_name_file       = './%s/%s/%s/%s_itemset_name.txt'                    % (res_folder, data_prefix, exp_prefix, data_prefix)
+    model_file              = './%s/%s/%s/%s_corels.mdl'                     % (res_folder, data_prefix, exp_prefix, data_prefix)
+    res_file                = './%s/%s/%s/%s_corels_result.txt'              % (res_folder, data_prefix, exp_prefix, data_prefix)
 
-    model = CORELS_Enumerator(k=k, opt=opt, rho=rho, beta=beta, branch_depth=branch_depth, minimal=False)
+    model = CORELS_Enumerator(k=k, opt=opt, rho=rho, beta=beta, metric=metric, min_pos=min_pos, maj_pos=maj_pos, branch_depth=branch_depth, minimal=False)
+
     model.fit(data_file, itemset_file, itemset_name_file, minor_file)
     joblib.dump(model, model_file, compress=9)
     z, acc = model.predict(test_file)
     res = np.array([list(range(1, len(model.rule_)+1)), [len(rule) for rule in model.rule_], model.obj_, acc]).T
     np.savetxt(res_file, res, delimiter=',')
-
-
 
 def test_corels_local(data_prefix, exp_prefix, test_prefix='', rho=0.015, beta=0.0, k=50, opt='-c 2 -p 1', branch_depth=np.inf):
 
@@ -184,7 +182,7 @@ def test_corels_local(data_prefix, exp_prefix, test_prefix='', rho=0.015, beta=0
     model_file              = './res_local/%s/%s/%s_corels.mdl'                     % (data_prefix, exp_prefix, data_prefix)
     res_file                = './res_local/%s/%s/%s_corels_result.txt'              % (data_prefix, exp_prefix, data_prefix)
 
-    model = CORELS_Enumerator(k=k, opt=opt, rho=rho, beta=beta, branch_depth=branch_depth, minimal=False)
+    model = CORELS_Enumerator(k=k, opt=opt, rho=rho, beta=beta, metric=5, branch_depth=branch_depth, minimal=False)
     model.fit(data_file, itemset_file, itemset_name_file, minor_file)
     joblib.dump(model, model_file, compress=9)
     z, acc = model.predict(data_file)

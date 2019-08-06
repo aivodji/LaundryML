@@ -1,0 +1,85 @@
+Model 0: accuracy train=0.894892; accuracy test=0.661916; obj:0.894550 
+IF juv_other_count:>0.5 THEN recidivate-within-two-years:Yes_is_True
+ELSE IF priors_count:0.5-1.5 THEN recidivate-within-two-years:Yes_is_False
+ELSE IF priors_count:15.5-27.5 THEN recidivate-within-two-years:Yes_is_True
+ELSE IF priors_count:<1 THEN recidivate-within-two-years:Yes_is_False
+ELSE IF priors_count:8.5-14.5 THEN recidivate-within-two-years:Yes_is_True
+ELSE IF age:>45 THEN recidivate-within-two-years:Yes_is_False
+ELSE recidivate-within-two-years:Yes_is_True
+
+Model 1: accuracy train=0.886051; accuracy test=0.657002; obj:0.886150 
+IF priors_count:15.5-27.5 THEN recidivate-within-two-years:Yes_is_True
+ELSE IF juv_other_count:>0.5 THEN recidivate-within-two-years:Yes_is_True
+ELSE IF age:>45 THEN recidivate-within-two-years:Yes_is_False
+ELSE IF priors_count:<1 THEN recidivate-within-two-years:Yes_is_False
+ELSE IF priors_count:0.5-1.5 THEN recidivate-within-two-years:Yes_is_False
+ELSE recidivate-within-two-years:Yes_is_True
+
+Model 2: accuracy train=0.881631; accuracy test=0.658477; obj:0.885410 
+IF juv_other_count:>0.5 THEN recidivate-within-two-years:Yes_is_True
+ELSE IF priors_count:0.5-1.5 THEN recidivate-within-two-years:Yes_is_False
+ELSE IF priors_count:<1 THEN recidivate-within-two-years:Yes_is_False
+ELSE IF priors_count:8.5-14.5 THEN recidivate-within-two-years:Yes_is_True
+ELSE IF age:>45 THEN recidivate-within-two-years:Yes_is_False
+ELSE recidivate-within-two-years:Yes_is_True
+
+Model 3: accuracy train=0.888507; accuracy test=0.667322; obj:0.879260 
+IF priors_count:15.5-27.5 THEN recidivate-within-two-years:Yes_is_True
+ELSE IF priors_count:8.5-14.5 THEN recidivate-within-two-years:Yes_is_True
+ELSE IF age:>45 THEN recidivate-within-two-years:Yes_is_False
+ELSE IF priors_count:5.5-8.5 THEN recidivate-within-two-years:Yes_is_True
+ELSE IF priors_count:4.5-5.5 THEN recidivate-within-two-years:Yes_is_True
+ELSE IF priors_count:2.5-4.5 THEN recidivate-within-two-years:Yes_is_True
+ELSE IF priors_count:<1 THEN recidivate-within-two-years:Yes_is_False
+ELSE IF juv_other_count:>0.5 THEN recidivate-within-two-years:Yes_is_True
+ELSE recidivate-within-two-years:Yes_is_False
+
+Model 4: accuracy train=0.891454; accuracy test=0.662899; obj:0.877970 
+IF priors_count:<1 THEN recidivate-within-two-years:Yes_is_False
+ELSE IF age:<25 THEN recidivate-within-two-years:Yes_is_True
+ELSE IF priors_count:0.5-1.5 THEN recidivate-within-two-years:Yes_is_False
+ELSE IF priors_count:8.5-14.5 THEN recidivate-within-two-years:Yes_is_True
+ELSE IF priors_count:15.5-27.5 THEN recidivate-within-two-years:Yes_is_True
+ELSE IF age:>45 THEN recidivate-within-two-years:Yes_is_False
+ELSE recidivate-within-two-years:Yes_is_True
+
+Model 5: accuracy train=0.843811; accuracy test=0.651597; obj:0.877830 
+IF priors_count:15.5-27.5 THEN recidivate-within-two-years:Yes_is_True
+ELSE IF priors_count:8.5-14.5 THEN recidivate-within-two-years:Yes_is_True
+ELSE IF age:>45 THEN recidivate-within-two-years:Yes_is_False
+ELSE IF priors_count:5.5-8.5 THEN recidivate-within-two-years:Yes_is_True
+ELSE IF priors_count:2.5-4.5 THEN recidivate-within-two-years:Yes_is_True
+ELSE recidivate-within-two-years:Yes_is_False
+
+Model 6: accuracy train=0.843811; accuracy test=0.651597; obj:0.877830 
+IF priors_count:15.5-27.5 THEN recidivate-within-two-years:Yes_is_True
+ELSE IF priors_count:8.5-14.5 THEN recidivate-within-two-years:Yes_is_True
+ELSE IF age:>45 THEN recidivate-within-two-years:Yes_is_False
+ELSE IF priors_count:5.5-8.5 THEN recidivate-within-two-years:Yes_is_True
+ELSE IF priors_count:2.5-4.5 THEN recidivate-within-two-years:Yes_is_True
+ELSE recidivate-within-two-years:Yes_is_False
+
+Model 7: accuracy train=0.843811; accuracy test=0.651597; obj:0.877830 
+IF priors_count:15.5-27.5 THEN recidivate-within-two-years:Yes_is_True
+ELSE IF priors_count:8.5-14.5 THEN recidivate-within-two-years:Yes_is_True
+ELSE IF age:>45 THEN recidivate-within-two-years:Yes_is_False
+ELSE IF priors_count:5.5-8.5 THEN recidivate-within-two-years:Yes_is_True
+ELSE IF priors_count:2.5-4.5 THEN recidivate-within-two-years:Yes_is_True
+ELSE recidivate-within-two-years:Yes_is_False
+
+Model 8: accuracy train=0.843811; accuracy test=0.651597; obj:0.877830 
+IF priors_count:15.5-27.5 THEN recidivate-within-two-years:Yes_is_True
+ELSE IF priors_count:8.5-14.5 THEN recidivate-within-two-years:Yes_is_True
+ELSE IF age:>45 THEN recidivate-within-two-years:Yes_is_False
+ELSE IF priors_count:5.5-8.5 THEN recidivate-within-two-years:Yes_is_True
+ELSE IF priors_count:2.5-4.5 THEN recidivate-within-two-years:Yes_is_True
+ELSE recidivate-within-two-years:Yes_is_False
+
+Model 9: accuracy train=0.843811; accuracy test=0.651597; obj:0.877830 
+IF priors_count:15.5-27.5 THEN recidivate-within-two-years:Yes_is_True
+ELSE IF priors_count:8.5-14.5 THEN recidivate-within-two-years:Yes_is_True
+ELSE IF age:>45 THEN recidivate-within-two-years:Yes_is_False
+ELSE IF priors_count:5.5-8.5 THEN recidivate-within-two-years:Yes_is_True
+ELSE IF priors_count:2.5-4.5 THEN recidivate-within-two-years:Yes_is_True
+ELSE recidivate-within-two-years:Yes_is_False
+

@@ -1,0 +1,11 @@
+Model 0: accuracy train=0.961672; accuracy test=0.832674; obj:0.922880 
+IF capital_gain:>7056 THEN >50K_is_True
+ELSE IF education:dropout THEN >50K_is_False
+ELSE IF marital:single THEN >50K_is_False
+ELSE IF education:HS-grad THEN >50K_is_False
+ELSE IF education:associates THEN >50K_is_False
+ELSE IF occupation:blue-collar THEN >50K_is_False
+ELSE IF workclass:FedGov THEN >50K_is_True
+ELSE IF gender:Female THEN >50K_is_False
+ELSE >50K_is_True
+

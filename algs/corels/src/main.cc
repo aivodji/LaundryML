@@ -14,7 +14,7 @@ NullLogger* logger;
 
 int main(int argc, char *argv[]) {
     const char usage[] = "USAGE: %s [-b] "
-        "[-n max_num_nodes] [-r regularization] [-v verbosity]  [-z fairness regularization]"
+        "[-n max_num_nodes] [-r regularization] [-v verbosity]  [-z fairness regularization] [-w fairness metric] [-y majority group position] [-x minority group position]"
         "-c (1|2|3|4) -p (0|1|2) [-f logging_frequency]"
         "-a (0|1|2) [-s] [-L latex_out]"
         "data.out data.label\n\n"
@@ -38,9 +38,12 @@ int main(int argc, char *argv[]) {
     int ablation = 0;
     bool calculate_size = false;
     double beta = 0.0;
+    int fairness = 1;
+    int min_pos = 1;
+    int maj_pos = 2;
 
     /* only parsing happens here */
-    while ((ch = getopt(argc, argv, "bsLc:p:v:n:r:f:a:z:")) != -1) {
+    while ((ch = getopt(argc, argv, "bsLc:p:v:n:r:f:a:z:w:x:y:")) != -1) {
         switch (ch) {
         case 'b':
             run_bfs = true;
@@ -77,6 +80,15 @@ int main(int argc, char *argv[]) {
             break;
         case 'z':
             beta = atof(optarg);
+            break;
+        case 'w':
+            fairness = atoi(optarg);
+            break;
+        case 'x':
+            min_pos = atoi(optarg);
+            break;
+        case 'y':
+            maj_pos = atoi(optarg);
             break;
         default:
             error = true;
@@ -212,17 +224,11 @@ int main(int argc, char *argv[]) {
         p = (PermutationMap*) null_pmap;
     }
 
-    //printf("----------Summary--------------: ");
-
-    //printf("number of sambles: %d\n", nsamples);
-    //printf("number of labels: %d\n", nlabels);
-
-
 
     CacheTree* tree = new CacheTree(nsamples, nrules, c, rules, labels, meta, ablation, calculate_size, type);
     printf("%s", run_type);
     // runs our algorithm
-    bbound(tree, max_num_nodes, q, p, beta);
+    bbound(tree, max_num_nodes, q, p, beta, fairness, maj_pos, min_pos);
 
     printf("final num_nodes: %zu\n", tree->num_nodes());
     printf("final num_evaluated: %zu\n", tree->num_evaluated());
@@ -232,6 +238,21 @@ int main(int argc, char *argv[]) {
        1 - tree->min_objective() + c*r_list.size());
     print_final_rulelist(r_list, tree->opt_predictions(),
                      latex_out, rules, labels, opt_fname);
+
+   
+    confusion_matrix_groups cmg = computeModelFairness(nsamples, r_list, tree->opt_predictions(), rules, labels, maj_pos, min_pos);
+    fairness_metrics fm = compute_fairness_metrics(cmg);
+    printf("===========================================> final statistical parity: %lf\n", fm.statistical_parity);
+    printf("===========================================> final predictive parity: %lf\n", fm.predictive_parity);
+    printf("===========================================> final predictive equqlity: %lf\n", fm.predictive_equality);
+    printf("===========================================> final equal opportunity: %lf\n", fm.equal_opportunity);
+
+     /* 
+    std::cout << "rulelist " << rules[r_list[0]].features << std::endl;
+    std::cout << "rule 0 " << rules[0].features << std::endl;
+    std::cout << "rule 1 " << rules[1].features << std::endl;
+    std::cout << "rule 2 " << rules[2].features << std::endl;
+    */
 
     printf("final total time: %f\n", time_diff(init));
     logger->dumpState();

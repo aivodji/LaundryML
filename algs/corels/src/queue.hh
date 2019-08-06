@@ -108,14 +108,46 @@ class Queue {
         char const *type_;
 };
 
-extern int bbound(CacheTree* tree, size_t max_num_nodes, Queue* q, PermutationMap* p, double beta);
+extern int bbound(CacheTree* tree, 
+                    size_t max_num_nodes, 
+                    Queue* q, 
+                    PermutationMap* p, 
+                    double beta,
+                    int fairness,
+                    int maj_pos,
+                    int min_pos);
 
-extern void evaluate_children(CacheTree* tree, Node* parent, tracking_vector<unsigned short, DataStruct::Tree> parent_prefix,
-        VECTOR parent_not_captured, Queue* q, PermutationMap* p, double beta);
+extern void evaluate_children(CacheTree* tree, 
+                                Node* parent, 
+                                tracking_vector<unsigned short, DataStruct::Tree> parent_prefix,
+                                VECTOR parent_not_captured, 
+                                Queue* q, 
+                                PermutationMap* p, 
+                                double beta,
+                                int fairness,
+                                int maj_pos,
+                                int min_pos);
 
 
-extern double computefairness(CacheTree* tree, VECTOR parent_not_captured, VECTOR captured);
+extern fairness_metrics compute_fairness_metrics(confusion_matrix_groups cmg);
 
+extern confusion_matrix_groups compute_confusion_matrix(tracking_vector<unsigned short, 
+                                                DataStruct::Tree> parent_prefix, 
+                                                CacheTree* tree, 
+                                                VECTOR parent_not_captured, 
+                                                VECTOR captured,
+                                                int index, 
+                                                int maj_pos,
+                                                int min_pos,
+                                                int prediction, 
+                                                int default_prediction);
 
-extern fairness_metrics compute_fairness_metrics(CacheTree* tree, VECTOR parent_not_captured, VECTOR captured);
+confusion_matrix_groups computeModelFairness(int nsamples,
+                                            const tracking_vector<unsigned short, DataStruct::Tree>& rulelist,
+                                            const tracking_vector<bool, DataStruct::Tree>& preds,                  
+                                            rule_t * rules,
+                                            rule_t * labels,
+                                            int maj_pos,
+                                            int min_pos);
+
 

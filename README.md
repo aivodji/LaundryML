@@ -1,6 +1,5 @@
 # LaundryML
 
-
 **LaundryML is a regularized model enumeration algorithm that enumerates rule lists for rationalization.
 
 This code is based on the implementation of the Certifiably Optimal RulE ListS (CORELS) algorithm. For information on CORELS, please visit [its website](https://corels.eecs.harvard.edu).
@@ -47,3 +46,23 @@ This code is based on the implementation of the Certifiably Optimal RulE ListS (
 #### Models performances
 * Run Rscript analysis_local_adult.R and Rscript analysis_local_adult.R in the "plotting_scripts" repository
 * Results are saved in plotting_scripts/data/graphs
+
+## Citing this work
+
+```
+@InProceedings{pmlr-v97-aivodji19a,
+  title = 	 {Fairwashing: the risk of rationalization},
+  author = 	 {Aivodji, Ulrich and Arai, Hiromi and Fortineau, Olivier and Gambs, S{\'e}bastien and Hara, Satoshi and Tapp, Alain},
+  booktitle = 	 {Proceedings of the 36th International Conference on Machine Learning},
+  pages = 	 {161--170},
+  year = 	 {2019},
+  editor = 	 {Chaudhuri, Kamalika and Salakhutdinov, Ruslan},
+  volume = 	 {97},
+  series = 	 {Proceedings of Machine Learning Research},
+  address = 	 {Long Beach, California, USA},
+  month = 	 {09--15 Jun},
+  publisher = 	 {PMLR},
+  pdf = 	 {http://proceedings.mlr.press/v97/aivodji19a/aivodji19a.pdf},
+  url = 	 {http://proceedings.mlr.press/v97/aivodji19a.html},
+}
+```

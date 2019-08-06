@@ -1,0 +1,1 @@
+./algs/corels/src/corels -n 100000 -r 0.005 -z 0.5 -w 4 -y 1 -x 2 -c 2 -p 1 ./data/compas/processed/_train.feature ./data/compas/processed/_train.label ./data/compas/processed/_train.minor

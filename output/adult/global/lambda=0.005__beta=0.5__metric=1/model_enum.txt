@@ -1,0 +1,4 @@
+Model 0: accuracy train=0.888904; accuracy test=0.795752; obj:0.924480 
+IF capital_gain:>7056 THEN >50K_is_True
+ELSE >50K_is_False
+

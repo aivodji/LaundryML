@@ -1,0 +1,6 @@
+#label_name
+>50K
+#itemset_name
+capital_gain:>7056
+education:masters-doctorate
+education:Prof-school
