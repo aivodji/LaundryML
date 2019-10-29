@@ -15,7 +15,7 @@ mlxtend==0.13.0
 mpmath==1.0.0
 numpy==1.14.3
 pandas==0.21.0
-Pillow==5.3.0
+Pillow==6.2.0
 pyparsing==2.2.0
 PyPDF2==1.26.0
 python-dateutil==2.7.3
